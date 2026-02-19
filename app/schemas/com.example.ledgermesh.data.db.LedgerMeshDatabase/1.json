@@ -1,0 +1,666 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "76cd82cbd99ae165cbfef354dad57dfb",
+    "entities": [
+      {
+        "tableName": "observations",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`observationId` TEXT NOT NULL, `sourceType` TEXT NOT NULL, `sourceLocator` TEXT NOT NULL, `rawPayload` TEXT NOT NULL, `amountMinor` INTEGER NOT NULL, `currency` TEXT NOT NULL, `timestamp` INTEGER, `timestampDateOnly` INTEGER NOT NULL, `direction` TEXT NOT NULL, `reference` TEXT, `counterparty` TEXT, `accountHint` TEXT, `parseConfidence` REAL NOT NULL, `ingestedAt` INTEGER NOT NULL, `contentHash` TEXT NOT NULL, `importSessionId` TEXT, `fpRef` TEXT, `fpAmtTime` TEXT, `fpAmtDay` TEXT, `fpSenderAmt` TEXT, PRIMARY KEY(`observationId`))",
+        "fields": [
+          {
+            "fieldPath": "observationId",
+            "columnName": "observationId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sourceType",
+            "columnName": "sourceType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sourceLocator",
+            "columnName": "sourceLocator",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rawPayload",
+            "columnName": "rawPayload",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "amountMinor",
+            "columnName": "amountMinor",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "currency",
+            "columnName": "currency",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timestamp",
+            "columnName": "timestamp",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "timestampDateOnly",
+            "columnName": "timestampDateOnly",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "direction",
+            "columnName": "direction",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "reference",
+            "columnName": "reference",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "counterparty",
+            "columnName": "counterparty",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "accountHint",
+            "columnName": "accountHint",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "parseConfidence",
+            "columnName": "parseConfidence",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ingestedAt",
+            "columnName": "ingestedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "contentHash",
+            "columnName": "contentHash",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "importSessionId",
+            "columnName": "importSessionId",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "fpRef",
+            "columnName": "fpRef",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "fpAmtTime",
+            "columnName": "fpAmtTime",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "fpAmtDay",
+            "columnName": "fpAmtDay",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "fpSenderAmt",
+            "columnName": "fpSenderAmt",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "observationId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_observations_contentHash",
+            "unique": true,
+            "columnNames": [
+              "contentHash"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_observations_contentHash` ON `${TABLE_NAME}` (`contentHash`)"
+          },
+          {
+            "name": "index_observations_amountMinor",
+            "unique": false,
+            "columnNames": [
+              "amountMinor"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_observations_amountMinor` ON `${TABLE_NAME}` (`amountMinor`)"
+          },
+          {
+            "name": "index_observations_timestamp",
+            "unique": false,
+            "columnNames": [
+              "timestamp"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_observations_timestamp` ON `${TABLE_NAME}` (`timestamp`)"
+          },
+          {
+            "name": "index_observations_sourceType_sourceLocator",
+            "unique": false,
+            "columnNames": [
+              "sourceType",
+              "sourceLocator"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_observations_sourceType_sourceLocator` ON `${TABLE_NAME}` (`sourceType`, `sourceLocator`)"
+          },
+          {
+            "name": "index_observations_importSessionId",
+            "unique": false,
+            "columnNames": [
+              "importSessionId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_observations_importSessionId` ON `${TABLE_NAME}` (`importSessionId`)"
+          },
+          {
+            "name": "index_observations_fpRef",
+            "unique": false,
+            "columnNames": [
+              "fpRef"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_observations_fpRef` ON `${TABLE_NAME}` (`fpRef`)"
+          },
+          {
+            "name": "index_observations_fpAmtTime",
+            "unique": false,
+            "columnNames": [
+              "fpAmtTime"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_observations_fpAmtTime` ON `${TABLE_NAME}` (`fpAmtTime`)"
+          },
+          {
+            "name": "index_observations_fpAmtDay",
+            "unique": false,
+            "columnNames": [
+              "fpAmtDay"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_observations_fpAmtDay` ON `${TABLE_NAME}` (`fpAmtDay`)"
+          },
+          {
+            "name": "index_observations_fpSenderAmt",
+            "unique": false,
+            "columnNames": [
+              "fpSenderAmt"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_observations_fpSenderAmt` ON `${TABLE_NAME}` (`fpSenderAmt`)"
+          }
+        ]
+      },
+      {
+        "tableName": "aggregates",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`aggregateId` TEXT NOT NULL, `canonicalAmountMinor` INTEGER NOT NULL, `canonicalCurrency` TEXT NOT NULL, `canonicalTimestamp` INTEGER, `isApproxTime` INTEGER NOT NULL, `canonicalDirection` TEXT NOT NULL, `canonicalReference` TEXT, `canonicalCounterparty` TEXT, `canonicalAccountHint` TEXT, `confidenceScore` INTEGER NOT NULL, `categoryId` TEXT, `userNotes` TEXT, `observationCount` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, PRIMARY KEY(`aggregateId`))",
+        "fields": [
+          {
+            "fieldPath": "aggregateId",
+            "columnName": "aggregateId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "canonicalAmountMinor",
+            "columnName": "canonicalAmountMinor",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "canonicalCurrency",
+            "columnName": "canonicalCurrency",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "canonicalTimestamp",
+            "columnName": "canonicalTimestamp",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "isApproxTime",
+            "columnName": "isApproxTime",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "canonicalDirection",
+            "columnName": "canonicalDirection",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "canonicalReference",
+            "columnName": "canonicalReference",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "canonicalCounterparty",
+            "columnName": "canonicalCounterparty",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "canonicalAccountHint",
+            "columnName": "canonicalAccountHint",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "confidenceScore",
+            "columnName": "confidenceScore",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "categoryId",
+            "columnName": "categoryId",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "userNotes",
+            "columnName": "userNotes",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "observationCount",
+            "columnName": "observationCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updatedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "aggregateId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_aggregates_canonicalTimestamp",
+            "unique": false,
+            "columnNames": [
+              "canonicalTimestamp"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_aggregates_canonicalTimestamp` ON `${TABLE_NAME}` (`canonicalTimestamp`)"
+          },
+          {
+            "name": "index_aggregates_canonicalAmountMinor",
+            "unique": false,
+            "columnNames": [
+              "canonicalAmountMinor"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_aggregates_canonicalAmountMinor` ON `${TABLE_NAME}` (`canonicalAmountMinor`)"
+          },
+          {
+            "name": "index_aggregates_categoryId",
+            "unique": false,
+            "columnNames": [
+              "categoryId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_aggregates_categoryId` ON `${TABLE_NAME}` (`categoryId`)"
+          },
+          {
+            "name": "index_aggregates_confidenceScore",
+            "unique": false,
+            "columnNames": [
+              "confidenceScore"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_aggregates_confidenceScore` ON `${TABLE_NAME}` (`confidenceScore`)"
+          }
+        ]
+      },
+      {
+        "tableName": "aggregate_observations",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`aggregateId` TEXT NOT NULL, `observationId` TEXT NOT NULL, `linkedAt` INTEGER NOT NULL, PRIMARY KEY(`aggregateId`, `observationId`), FOREIGN KEY(`aggregateId`) REFERENCES `aggregates`(`aggregateId`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`observationId`) REFERENCES `observations`(`observationId`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "aggregateId",
+            "columnName": "aggregateId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "observationId",
+            "columnName": "observationId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "linkedAt",
+            "columnName": "linkedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "aggregateId",
+            "observationId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_aggregate_observations_observationId",
+            "unique": false,
+            "columnNames": [
+              "observationId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_aggregate_observations_observationId` ON `${TABLE_NAME}` (`observationId`)"
+          },
+          {
+            "name": "index_aggregate_observations_aggregateId",
+            "unique": false,
+            "columnNames": [
+              "aggregateId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_aggregate_observations_aggregateId` ON `${TABLE_NAME}` (`aggregateId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "aggregates",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "aggregateId"
+            ],
+            "referencedColumns": [
+              "aggregateId"
+            ]
+          },
+          {
+            "table": "observations",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "observationId"
+            ],
+            "referencedColumns": [
+              "observationId"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "import_sessions",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sessionId` TEXT NOT NULL, `sourceType` TEXT NOT NULL, `sourceLocator` TEXT NOT NULL, `status` TEXT NOT NULL, `totalRecords` INTEGER NOT NULL, `importedRecords` INTEGER NOT NULL, `skippedRecords` INTEGER NOT NULL, `failedRecords` INTEGER NOT NULL, `errorMessage` TEXT, `createdAt` INTEGER NOT NULL, `completedAt` INTEGER, PRIMARY KEY(`sessionId`))",
+        "fields": [
+          {
+            "fieldPath": "sessionId",
+            "columnName": "sessionId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sourceType",
+            "columnName": "sourceType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sourceLocator",
+            "columnName": "sourceLocator",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalRecords",
+            "columnName": "totalRecords",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "importedRecords",
+            "columnName": "importedRecords",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "skippedRecords",
+            "columnName": "skippedRecords",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "failedRecords",
+            "columnName": "failedRecords",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "errorMessage",
+            "columnName": "errorMessage",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "completedAt",
+            "columnName": "completedAt",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sessionId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_import_sessions_status",
+            "unique": false,
+            "columnNames": [
+              "status"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_import_sessions_status` ON `${TABLE_NAME}` (`status`)"
+          },
+          {
+            "name": "index_import_sessions_createdAt",
+            "unique": false,
+            "columnNames": [
+              "createdAt"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_import_sessions_createdAt` ON `${TABLE_NAME}` (`createdAt`)"
+          }
+        ]
+      },
+      {
+        "tableName": "ops_log",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`opId` TEXT NOT NULL, `operationType` TEXT NOT NULL, `targetAggregateId` TEXT NOT NULL, `secondaryAggregateId` TEXT, `affectedObservationIds` TEXT, `fieldName` TEXT, `oldValue` TEXT, `newValue` TEXT, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`opId`))",
+        "fields": [
+          {
+            "fieldPath": "opId",
+            "columnName": "opId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "operationType",
+            "columnName": "operationType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "targetAggregateId",
+            "columnName": "targetAggregateId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "secondaryAggregateId",
+            "columnName": "secondaryAggregateId",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "affectedObservationIds",
+            "columnName": "affectedObservationIds",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "fieldName",
+            "columnName": "fieldName",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "oldValue",
+            "columnName": "oldValue",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "newValue",
+            "columnName": "newValue",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "opId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_ops_log_operationType",
+            "unique": false,
+            "columnNames": [
+              "operationType"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_ops_log_operationType` ON `${TABLE_NAME}` (`operationType`)"
+          },
+          {
+            "name": "index_ops_log_createdAt",
+            "unique": false,
+            "columnNames": [
+              "createdAt"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_ops_log_createdAt` ON `${TABLE_NAME}` (`createdAt`)"
+          },
+          {
+            "name": "index_ops_log_targetAggregateId",
+            "unique": false,
+            "columnNames": [
+              "targetAggregateId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_ops_log_targetAggregateId` ON `${TABLE_NAME}` (`targetAggregateId`)"
+          }
+        ]
+      },
+      {
+        "tableName": "categories",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`categoryId` TEXT NOT NULL, `name` TEXT NOT NULL, `icon` TEXT, `colorHex` TEXT, `isDefault` INTEGER NOT NULL, PRIMARY KEY(`categoryId`))",
+        "fields": [
+          {
+            "fieldPath": "categoryId",
+            "columnName": "categoryId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "icon",
+            "columnName": "icon",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "colorHex",
+            "columnName": "colorHex",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "isDefault",
+            "columnName": "isDefault",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "categoryId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_categories_name",
+            "unique": true,
+            "columnNames": [
+              "name"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_categories_name` ON `${TABLE_NAME}` (`name`)"
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '76cd82cbd99ae165cbfef354dad57dfb')"
+    ]
+  }
+}
